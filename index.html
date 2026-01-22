@@ -66,46 +66,73 @@
     </section>
 
     <section id="work" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <div class="gallery-item relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 md:col-span-2 aspect-[16/10]">
-                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1200" alt="Illustration" class="w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-10">
-                        <h3 class="text-white text-3xl font-bold">Digital Illustration</h3>
-                    </div>
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div onclick="openCarousel(0)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 md:col-span-2 aspect-[16/10]">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1200" alt="Illustration" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-10">
+                    <h3 class="text-white text-3xl font-bold font-display">Digital Illustration</h3>
                 </div>
+            </div>
 
-                <div class="gallery-item relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800" alt="Branding" class="w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-bold">Web Design</h3>
-                    </div>
+            <div onclick="openCarousel(1)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
+                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800" alt="Branding" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <h3 class="text-white text-2xl font-bold font-display">Web Design</h3>
                 </div>
+            </div>
 
-                <div class="gallery-item relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="3D Art" class="w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-bold">Advertising Design</h3>
-                    </div>
+            <div onclick="openCarousel(2)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="3D Art" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <h3 class="text-white text-2xl font-bold font-display">Advertising Design</h3>
                 </div>
+            </div>
 
-                <div class="gallery-item relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-[4/5]">
-                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" alt="Poster Design" class="w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-bold">2D/3D Animation</h3>
-                    </div>
+            <div onclick="openCarousel(3)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-[4/5]">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" alt="Poster Design" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <h3 class="text-white text-2xl font-bold font-display">2D/3D Animation</h3>
                 </div>
+            </div>
 
-                <div class="gallery-item relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" alt="Logofolio" class="w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-bold">Branding</h3>
-                    </div>
+            <div onclick="openCarousel(4)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" alt="Logofolio" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <h3 class="text-white text-2xl font-bold font-display">Branding</h3>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<div id="carouselModal" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col transition-all duration-500 opacity-0 scale-95">
+    <div class="p-6 flex justify-between items-center text-white">
+        <h2 id="modalTitle" class="text-2xl font-bold font-display italic">Project Details</h2>
+        <button onclick="closeCarousel()" class="p-3 hover:bg-zinc-800 rounded-full transition text-accent">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+    </div>
+    
+    <div class="flex-1 relative flex items-center justify-center overflow-hidden">
+        <button onclick="moveSlide(-1)" class="absolute left-6 z-10 p-4 bg-white/5 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition">
+            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+        </button>
+        <button onclick="moveSlide(1)" class="absolute right-6 z-10 p-4 bg-white/5 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition">
+            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+        </button>
+
+        <div class="w-full h-full flex items-center justify-center p-4">
+            <img id="carouselImg" src="" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-all duration-300">
+        </div>
+    </div>
+
+    <div id="slideCounter" class="p-8 text-center text-zinc-500 font-bold tracking-widest text-sm">
+        1 / 6
+    </div>
+</div>
+</section>
 
     <footer id="contact" class="py-32 px-6 bg-zinc-100 dark:bg-zinc-900 mt-20">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
@@ -139,6 +166,7 @@
     </script>
 </body>
 </html>
+
 
 
 
