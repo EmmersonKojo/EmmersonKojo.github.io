@@ -149,23 +149,7 @@
     </footer>
 
     <script>
-        lucide.createIcons();
-
-        // Dark Mode Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
-    </script>
-    <script>
-    // 1. Data Structure for 5 projects, each with 6 images
+    // 1. PROJECT DATA (5 Projects x 6 Images)
     const projectData = [
         { name: "Digital Illustration", imgs: ["https://picsum.photos/seed/a1/1200/800", "https://picsum.photos/seed/a2/1200/800", "https://picsum.photos/seed/a3/1200/800", "https://picsum.photos/seed/a4/1200/800", "https://picsum.photos/seed/a5/1200/800", "https://picsum.photos/seed/a6/1200/800"] },
         { name: "Web Design", imgs: ["https://picsum.photos/seed/b1/1200/800", "https://picsum.photos/seed/b2/1200/800", "https://picsum.photos/seed/b3/1200/800", "https://picsum.photos/seed/b4/1200/800", "https://picsum.photos/seed/b5/1200/800", "https://picsum.photos/seed/b6/1200/800"] },
@@ -176,17 +160,18 @@
 
     let activeProject = 0;
     let activeSlide = 0;
+    let touchStartX = 0;
 
     const modal = document.getElementById('carouselModal');
     const cImg = document.getElementById('carouselImg');
     const cTitle = document.getElementById('modalTitle');
     const cCount = document.getElementById('slideCounter');
 
+    // --- CAROUSEL FUNCTIONS ---
     function openCarousel(index) {
         activeProject = index;
         activeSlide = 0;
         updateCarousel();
-        
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.classList.remove('opacity-0', 'scale-95');
@@ -207,13 +192,10 @@
     function moveSlide(step) {
         activeSlide = (activeSlide + step + 6) % 6;
         cImg.style.opacity = '0';
-        cImg.style.transform = 'scale(0.95)';
-        
         setTimeout(() => {
             updateCarousel();
             cImg.style.opacity = '1';
-            cImg.style.transform = 'scale(1)';
-        }, 300);
+        }, 200);
     }
 
     function updateCarousel() {
@@ -223,7 +205,15 @@
         cCount.innerText = `${activeSlide + 1} / 6`;
     }
 
-    // Keyboard support
+    // --- TOUCH & GESTURE SUPPORT ---
+    modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
+    modal.addEventListener('touchend', e => {
+        let touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) moveSlide(1);  // Swipe Left
+        if (touchEndX > touchStartX + 50) moveSlide(-1); // Swipe Right
+    }, false);
+
+    // --- KEYBOARD SUPPORT ---
     document.addEventListener('keydown', (e) => {
         if (!modal.classList.contains('hidden')) {
             if (e.key === "Escape") closeCarousel();
@@ -232,23 +222,35 @@
         }
     });
 
-    // Dark Mode Toggle Logic (Merged)
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        html.classList.add('dark');
-    }
-    if(themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
+    // --- DARK MODE LOGIC ---
+    function initTheme() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+
+        if(themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            });
+        }
     }
 
-    lucide.createIcons();
+    // --- INITIALIZE EVERYTHING ---
+    window.onload = () => {
+        initTheme();
+        lucide.createIcons();
+    };
+
+    // If using the shared navbar script from earlier, re-init icons after fetch
+    // fetch('nav.html').then(res => res.text()).then(data => { ... lucide.createIcons(); });
 </script>
 </body>
 </html>
+
 
 
 
