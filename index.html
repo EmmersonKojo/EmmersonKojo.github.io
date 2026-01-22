@@ -164,8 +164,92 @@
             localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
         });
     </script>
+    <script>
+    // 1. Data Structure for 5 projects, each with 6 images
+    const projectData = [
+        { name: "Digital Illustration", imgs: ["https://picsum.photos/seed/a1/1200/800", "https://picsum.photos/seed/a2/1200/800", "https://picsum.photos/seed/a3/1200/800", "https://picsum.photos/seed/a4/1200/800", "https://picsum.photos/seed/a5/1200/800", "https://picsum.photos/seed/a6/1200/800"] },
+        { name: "Web Design", imgs: ["https://picsum.photos/seed/b1/1200/800", "https://picsum.photos/seed/b2/1200/800", "https://picsum.photos/seed/b3/1200/800", "https://picsum.photos/seed/b4/1200/800", "https://picsum.photos/seed/b5/1200/800", "https://picsum.photos/seed/b6/1200/800"] },
+        { name: "Advertising Design", imgs: ["https://picsum.photos/seed/c1/1200/800", "https://picsum.photos/seed/c2/1200/800", "https://picsum.photos/seed/c3/1200/800", "https://picsum.photos/seed/c4/1200/800", "https://picsum.photos/seed/c5/1200/800", "https://picsum.photos/seed/c6/1200/800"] },
+        { name: "2D/3D Animation", imgs: ["https://picsum.photos/seed/d1/1200/800", "https://picsum.photos/seed/d2/1200/800", "https://picsum.photos/seed/d3/1200/800", "https://picsum.photos/seed/d4/1200/800", "https://picsum.photos/seed/d5/1200/800", "https://picsum.photos/seed/d6/1200/800"] },
+        { name: "Branding", imgs: ["https://picsum.photos/seed/e1/1200/800", "https://picsum.photos/seed/e2/1200/800", "https://picsum.photos/seed/e3/1200/800", "https://picsum.photos/seed/e4/1200/800", "https://picsum.photos/seed/e5/1200/800", "https://picsum.photos/seed/e6/1200/800"] }
+    ];
+
+    let activeProject = 0;
+    let activeSlide = 0;
+
+    const modal = document.getElementById('carouselModal');
+    const cImg = document.getElementById('carouselImg');
+    const cTitle = document.getElementById('modalTitle');
+    const cCount = document.getElementById('slideCounter');
+
+    function openCarousel(index) {
+        activeProject = index;
+        activeSlide = 0;
+        updateCarousel();
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0', 'scale-95');
+            modal.classList.add('opacity-100', 'scale-100', 'flex');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCarousel() {
+        modal.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 500);
+        document.body.style.overflow = 'auto';
+    }
+
+    function moveSlide(step) {
+        activeSlide = (activeSlide + step + 6) % 6;
+        cImg.style.opacity = '0';
+        cImg.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+            updateCarousel();
+            cImg.style.opacity = '1';
+            cImg.style.transform = 'scale(1)';
+        }, 300);
+    }
+
+    function updateCarousel() {
+        const p = projectData[activeProject];
+        cImg.src = p.imgs[activeSlide];
+        cTitle.innerText = p.name;
+        cCount.innerText = `${activeSlide + 1} / 6`;
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('hidden')) {
+            if (e.key === "Escape") closeCarousel();
+            if (e.key === "ArrowRight") moveSlide(1);
+            if (e.key === "ArrowLeft") moveSlide(-1);
+        }
+    });
+
+    // Dark Mode Toggle Logic (Merged)
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+    }
+    if(themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+    }
+
+    lucide.createIcons();
+</script>
 </body>
 </html>
+
 
 
 
