@@ -189,13 +189,10 @@
         document.body.style.overflow = 'auto';
     }
 
-    function moveSlide(step) {
-        activeSlide = (activeSlide + step + 6) % 6;
-        cImg.style.opacity = '0';
-        setTimeout(() => {
-            updateCarousel();
-            cImg.style.opacity = '1';
-        }, 200);
+   function moveSlide(step) {
+    const totalSlides = projectData[activeProject].imgs.length;
+    activeSlide = (activeSlide + step + totalSlides) % totalSlides;
+    // ... rest of your transition code
     }
 
     function updateCarousel() {
@@ -250,6 +247,7 @@
 </script>
 </body>
 </html>
+
 
 
 
