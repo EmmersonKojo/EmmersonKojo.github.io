@@ -196,11 +196,12 @@
     }
 
     function updateCarousel() {
-        const p = projectData[activeProject];
-        cImg.src = p.imgs[activeSlide];
-        cTitle.innerText = p.name;
-        cCount.innerText = `${activeSlide + 1} / 6`;
-    }
+    const p = projectData[activeProject];
+    const total = p.imgs.length; // Dynamic total
+    cImg.src = p.imgs[activeSlide];
+    cTitle.innerText = p.name;
+    cCount.innerText = `${activeSlide + 1} / ${total}`; // Updated here
+}
 
     // --- TOUCH & GESTURE SUPPORT ---
     modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
@@ -247,6 +248,7 @@
 </script>
 </body>
 </html>
+
 
 
 
