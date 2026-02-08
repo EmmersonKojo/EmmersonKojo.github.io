@@ -188,27 +188,34 @@
         }, 500);
         document.body.style.overflow = 'auto';
     }
+function moveSlide(step) {
+    // 1. Get the current project and its total images
+    const currentProject = projectData[activeProject];
+    if (!currentProject) return; // Safety check
 
-   function moveSlide(step) {
-        const totalSlides = projectData[activeProject].imgs.length;
-        activeSlide = (activeSlide + step + totalSlides) % totalSlides;
-        
-        // 1. Add a quick fade out for a smooth transition
-        cImg.style.opacity = '0';
-        
-        // 2. Wait 200ms, then update the image and fade back in
-        setTimeout(() => {
-            updateCarousel();
-            cImg.style.opacity = '1';
-        }, 200);
-    }
+    const total = currentProject.imgs.length;
+    
+    // 2. Calculate the new slide index
+    activeSlide = (activeSlide + step + total) % total;
+    
+    console.log(`Switching to slide: ${activeSlide + 1} of ${total}`);
 
-    function updateCarousel() {
+    // 3. Trigger the UI update
+    updateCarousel();
+}
+
+function updateCarousel() {
     const p = projectData[activeProject];
-    const total = p.imgs.length; // Dynamic total
+    const total = p.imgs.length;
+    
+    // Update the Image source
     cImg.src = p.imgs[activeSlide];
+    
+    // Update the Title and Counter
     cTitle.innerText = p.name;
-    cCount.innerText = `${activeSlide + 1} / ${total}`; // Updated here
+    cCount.innerText = `${activeSlide + 1} / ${total}`;
+    
+    console.log("Current Image Path:", cImg.src);
 }
 
     // --- TOUCH & GESTURE SUPPORT ---
@@ -256,6 +263,7 @@
 </script>
 </body>
 </html>
+
 
 
 
