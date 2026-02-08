@@ -190,9 +190,17 @@
     }
 
    function moveSlide(step) {
-    const totalSlides = projectData[activeProject].imgs.length;
-    activeSlide = (activeSlide + step + totalSlides) % totalSlides;
-    // ... rest of your transition code
+        const totalSlides = projectData[activeProject].imgs.length;
+        activeSlide = (activeSlide + step + totalSlides) % totalSlides;
+        
+        // 1. Add a quick fade out for a smooth transition
+        cImg.style.opacity = '0';
+        
+        // 2. Wait 200ms, then update the image and fade back in
+        setTimeout(() => {
+            updateCarousel();
+            cImg.style.opacity = '1';
+        }, 200);
     }
 
     function updateCarousel() {
@@ -248,6 +256,7 @@
 </script>
 </body>
 </html>
+
 
 
 
