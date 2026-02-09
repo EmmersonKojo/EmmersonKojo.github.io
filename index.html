@@ -82,9 +82,14 @@
     .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .card img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* SPECIAL TWO-COLUMN MARKETING STYLES */
+    /* LOGO DESIGN SPECIFIC: Half Size Styles */
+    #track3 .card {
+        width: calc(var(--card-width) / 2);
+    }
+
+    /* MARKETING STYLES */
     .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
-    .offset-row { animation-delay: -15s !important; } /* This staggers the second row images */
+    .offset-row { animation-delay: -15s !important; } 
 
     .animate-slow { animation: scroll 35s linear infinite; }    
     .animate-reverse { animation: scroll-reverse 25s linear infinite; } 
@@ -165,32 +170,32 @@
     <div class="section-label">01. Marketing & Advertising</div>
     <div class="carousel-container marketing-carousel">
         <div class="carousel-track animate-slow" id="track1-a">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design 13"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design 6"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design 12"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design 10"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design 9"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design 11"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design"></div>
         </div>
         <div class="carousel-track animate-slow offset-row" id="track1-b">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design 13"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design 6"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design 12"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design 10"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design 9"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design 11"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design"></div>
         </div>
     </div>
 
     <div class="section-label">02. Branding & Product Design</div>
     <div class="carousel-container">
         <div class="carousel-track animate-reverse" id="track2">
-            <div class="card"><img src="images/projects/branding/br-7.jpg" alt="Branding Design"></div>
-            <div class="card"><img src="images/projects/branding/br-3.jpg" alt="Branding Design"></div>
-            <div class="card"><img src="images/projects/branding/br-5.jpg" alt="Branding Design"></div>
-            <div class="card"><img src="images/projects/branding/br-4.png" alt="Branding Design"></div>
-            <div class="card"><img src="images/projects/branding/br-6.png" alt="Branding Design"></div>
-            <div class="card"><img src="images/projects/branding/br-10.png" alt="Branding Design"></div>
+            <div class="card"><img src="images/projects/branding/br-7.jpg" alt="Branding"></div>
+            <div class="card"><img src="images/projects/branding/br-3.jpg" alt="Branding"></div>
+            <div class="card"><img src="images/projects/branding/br-5.jpg" alt="Branding"></div>
+            <div class="card"><img src="images/projects/branding/br-4.png" alt="Branding"></div>
+            <div class="card"><img src="images/projects/branding/br-6.png" alt="Branding"></div>
+            <div class="card"><img src="images/projects/branding/br-10.png" alt="Branding"></div>
         </div>
     </div>
 
