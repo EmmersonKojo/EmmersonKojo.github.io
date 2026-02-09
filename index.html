@@ -82,9 +82,9 @@
     .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .card img { width: 100%; height: 100%; object-fit: cover; }
 
-    .animate-slow { animation: scroll 25s linear infinite; }    
-    .animate-reverse { animation: scroll-reverse 20s linear infinite; } 
-    .animate-medium { animation: scroll 15s linear infinite; }   
+    .animate-slow { animation: scroll 35s linear infinite; }    
+    .animate-reverse { animation: scroll-reverse 25s linear infinite; } 
+    .animate-medium { animation: scroll 20s linear infinite; }   
 
     @keyframes scroll {
         0% { transform: translateX(0); }
@@ -98,16 +98,13 @@
     /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 768px) {
         :root {
-            /* Cards take up 90% of screen width on mobile */
-            --card-width: 90vw;
+            --card-width: 85vw;
             --card-gap: 15px;
         }
         header { padding: 15px 20px; }
         .hero { padding: 120px 20px 20px; }
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
-        
-        /* Reduce expansion on mobile to prevent cards going off-screen */
         .card:hover { transform: scale(1.05); }
     }
 
@@ -131,7 +128,7 @@
         color: var(--text-color); text-decoration: none; font-weight: 700;
         border-bottom: 2px solid var(--label-color); padding-bottom: 5px;
         transition: border-color 0.3s, opacity 0.3s;
-        word-break: break-all; /* Prevents long emails from breaking mobile layout */
+        word-break: break-all;
     }
     .email-link:hover { opacity: 0.7; border-color: var(--accent-color); }
 
@@ -164,10 +161,12 @@
     <div class="section-label">01. Marketing & Advertising</div>
     <div class="carousel-container">
         <div class="carousel-track animate-slow" id="track1">
-            <div class="card"><img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=800"></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&q=80&w=800"></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800"></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design 13"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design 6"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design 12"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design 10"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design 9"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design 11"></div>
         </div>
     </div>
 
