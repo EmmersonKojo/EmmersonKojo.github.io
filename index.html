@@ -107,14 +107,18 @@
     /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 768px) {
         :root {
-            --card-width: 45vw;
-            --card-gap: 15px;
+            /* Adjusting to fit 4 columns (approx 22% width + small gaps) */
+            --card-width: 22vw; 
+            --card-gap: 8px;
         }
         header { padding: 15px 20px; }
         .hero { padding: 120px 20px 20px; }
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
         .card:hover { transform: scale(1.05); }
+        
+        /* Ensure Logo Design stays even smaller (1/8th of screen) if desired, 
+           otherwise it will inherit the half-width of the new 22vw */
     }
 
     /* --- CONTACT SECTION --- */
@@ -228,13 +232,11 @@
     <footer>&copy; Turning Ideas into Art since 2018</footer>
 
     <script>
-        // Initializing tracks for infinite scroll (duplicated content)
         ['track1-a', 'track1-b', 'track2', 'track3'].forEach(id => {
             const track = document.getElementById(id);
             if(track) track.innerHTML += track.innerHTML; 
         });
 
-        // Theme Toggle Logic
         const themeBtn = document.getElementById('themeBtn');
         if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); }
         themeBtn.addEventListener('click', () => {
@@ -242,7 +244,6 @@
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         });
 
-        // Intersection Observer for Reveal Text
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('is-visible');
@@ -254,5 +255,3 @@
     </script>
 </body>
 </html>
-
-
