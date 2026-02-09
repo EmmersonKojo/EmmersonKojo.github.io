@@ -1,281 +1,225 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emerson | Communication Designer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        accent: '#f43f5e', // A vibrant rose accent
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Emerson | Communication Design Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
     <style>
-        .dark { background-color: #0a0a0a; }
-        .gallery-item:hover img { transform: scale(1.05); }
-    </style>
+    :root {
+        --bg-color: #0a0a0a;
+        --text-color: #ffffff;
+        --header-bg: #000000;
+        --card-bg: #111;
+        --label-color: #888;
+        --accent-color: #ff3e00; 
+        --card-width: 400px; 
+        --card-gap: 25px;
+    }
+
+    body.light-mode {
+        --bg-color: #f5f5f5;
+        --text-color: #0a0a0a;
+        --header-bg: #ffffff;
+        --card-bg: #eeeeee;
+        --label-color: #444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        margin: 0; padding: 0;
+        background-color: var(--bg-color);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+        overflow-x: hidden;
+        transition: background-color 0.4s, color 0.4s;
+    }
+
+    /* --- NAVIGATION --- */
+    header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 20px 50px; position: fixed;
+        top: 0; left: 0; width: 100%; box-sizing: border-box; z-index: 1000;
+        background-color: var(--header-bg); transition: background-color 0.4s;
+        border-bottom: 1px solid rgba(128,128,128,0.1);
+    }
+
+    .logo { font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -0.5px; }
+    header nav { display: flex; align-items: center; gap: 30px; }
+    header nav a { color: var(--text-color); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+
+    .theme-toggle {
+        background: none; border: none; color: var(--text-color); cursor: pointer;
+        padding: 8px; display: flex; align-items: center; justify-content: center;
+        transition: transform 0.3s ease;
+    }
+    .theme-toggle:hover { transform: rotate(15deg) scale(1.1); }
+    .theme-toggle svg { width: 20px; height: 20px; fill: currentColor; }
+    .theme-toggle .moon-icon { display: none; }
+    body.light-mode .theme-toggle .sun-icon { display: none; }
+    body.light-mode .theme-toggle .moon-icon { display: block; }
+
+    /* --- HERO & ABOUT --- */
+    .hero { padding: 180px 50px 40px; max-width: 1200px; }
+    .hero h1 { font-size: clamp(3.5rem, 10vw, 7rem); line-height: 0.85; margin: 0; font-weight: 900; text-transform: uppercase; }
+    .hero h1 span { font-family: 'Playfair Display', serif; font-style: italic; text-transform: lowercase; color: var(--accent-color); }
+
+    .about-section { padding: 40px 50px 80px; max-width: 900px; }
+    .about-text { font-size: clamp(1.2rem, 3vw, 1.8rem); line-height: 1.4; font-weight: 400; opacity: 0.9; }
+    .about-text strong { color: var(--text-color); font-weight: 700; border-bottom: 2px solid var(--accent-color); }
+
+    /* --- CAROUSELS --- */
+    .section-label { padding: 0 50px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 4px; color: var(--label-color); margin-top: 80px; font-weight: 700; }
+    .carousel-container { width: 100%; overflow: hidden; padding: 60px 0; position: relative; }
+    .carousel-track { display: flex; width: max-content; gap: var(--card-gap); will-change: transform; }
+    
+    .card {
+        width: var(--card-width); aspect-ratio: 1 / 1;
+        background: var(--card-bg); flex-shrink: 0; overflow: hidden;
+        position: relative; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); z-index: 1;
+    }
+    .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .card img { width: 100%; height: 100%; object-fit: cover; }
+
+    .animate-slow { animation: scroll 25s linear infinite; }    
+    .animate-reverse { animation: scroll-reverse 20s linear infinite; } 
+    .animate-medium { animation: scroll 15s linear infinite; }   
+
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - (var(--card-gap) / 2))); }
+    }
+    @keyframes scroll-reverse {
+        0% { transform: translateX(calc(-50% - (var(--card-gap) / 2))); }
+        100% { transform: translateX(0); }
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+        :root {
+            /* Cards take up 90% of screen width on mobile */
+            --card-width: 90vw;
+            --card-gap: 15px;
+        }
+        header { padding: 15px 20px; }
+        .hero { padding: 120px 20px 20px; }
+        .about-section { padding: 20px 20px 40px; }
+        .section-label { padding: 0 20px; margin-top: 40px; }
+        
+        /* Reduce expansion on mobile to prevent cards going off-screen */
+        .card:hover { transform: scale(1.05); }
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact-section { padding: 100px 20px; text-align: center; background-color: var(--card-bg); margin-top: 100px; transition: background-color 0.4s; }
+    
+    .reveal-text { 
+        font-weight: 900; 
+        font-size: clamp(3rem, 12vw, 10rem); 
+        margin: 0; line-height: 1; text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(60px);
+        transition: opacity 1s ease-out, transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal-text.is-visible { opacity: 1; transform: translateY(0); }
+
+    .contact-section p { font-size: 1.1rem; letter-spacing: 1px; margin: 20px 0 40px; font-weight: 400; opacity: 0.8; }
+    .email-link {
+        font-size: clamp(1rem, 5vw, 2.5rem);
+        color: var(--text-color); text-decoration: none; font-weight: 700;
+        border-bottom: 2px solid var(--label-color); padding-bottom: 5px;
+        transition: border-color 0.3s, opacity 0.3s;
+        word-break: break-all; /* Prevents long emails from breaking mobile layout */
+    }
+    .email-link:hover { opacity: 0.7; border-color: var(--accent-color); }
+
+    footer { padding: 40px 20px; color: var(--label-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+</style>
 </head>
-<body class="bg-[#fafafa] text-zinc-900 dark:bg-[#0a0a0a] dark:text-zinc-100 transition-colors duration-300 font-sans">
+<body>
 
-    <nav class="fixed w-full z-50 bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <span class="text-2xl font-black tracking-tighter font-display uppercase">Emerson.</span>
-            
-            <div class="flex items-center gap-10">
-                <div class="hidden md:flex gap-8 font-medium text-sm uppercase tracking-widest">
-                    <a href="#work" class="hover:text-accent transition">Work</a>
-                    <a href="#about" class="hover:text-accent transition">About</a>
-                    <a href="#contact" class="hover:text-accent transition">Contact</a>
-                </div>
-                
-                <button id="theme-toggle" class="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:ring-2 ring-accent transition-all">
-                    <i data-lucide="sun" class="hidden dark:block w-5 h-5 text-yellow-400"></i>
-                    <i data-lucide="moon" class="block dark:hidden w-5 h-5 text-zinc-600"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <header>
+        <div class="logo">Emerson</div>
+        <nav>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Light/Dark Mode">
+                <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41z"/></svg>
+                <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.12 22C6.54 22 2 17.46 2 11.88c0-4.77 3.35-8.86 8-9.87.56-.12 1.08.34 1.08.91 0 .26-.1.52-.29.7-1.14 1.1-1.79 2.59-1.79 4.2 0 3.59 2.91 6.5 6.5 6.5 1.61 0 3.1-.59 4.25-1.57.21-.18.5-.25.76-.17.56.16.89.74.74 1.3-.96 3.66-4.3 6.31-8.24 6.62-.16.01-.33.02-.49.02z"/></svg>
+            </button>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <section class="pt-48 pb-32 px-6">
-        <div class="max-w-7xl mx-auto">
-            <p class="text-accent font-bold tracking-[0.2em] uppercase mb-4">Communication Designer</p>
-            <h1 class="text-6xl md:text-8xl font-black font-display leading-[0.9] mb-8 tracking-tighter">
-                Visual stories <br/>told through <span class="italic font-light">pixels & ink.</span>
-            </h1>
-            <p class="text-xl text-zinc-500 dark:text-zinc-400 max-w-xl mb-12 leading-relaxed">
-                Specializing in brand identity, editorial illustration, and improving user experience for digital art forms & platforms.
-            </p>
-            <a href="#work" class="inline-flex items-center gap-2 group text-lg font-bold">
-                See Featured Work 
-                <i data-lucide="arrow-right" class="group-hover:translate-x-2 transition-transform"></i>
-            </a>
-        </div>
+    <section class="hero">
+        <h1>Turning<span> Complex Ideas</span> <br>Into Art</h1>
     </section>
 
-    <section id="work" class="py-20 px-6">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <div onclick="openCarousel(0)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 md:col-span-2 aspect-[16/10]">
-                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1200" alt="Illustration" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-10">
-                    <h3 class="text-white text-3xl font-bold font-display">Digital Illustration</h3>
-                </div>
-            </div>
+    <section class="about-section">
+        <p class="about-text">
+            I'm a seasoned <strong>creative professional with 8 years of experience</strong> in generating innovative ideas and concepts for various communication purposes, specializing in <strong>Communication and Media Design, Digital Marketing, Branding and Web Design.</strong>
+        </p>
+    </section>
 
-            <div onclick="openCarousel(1)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800" alt="Branding" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <h3 class="text-white text-2xl font-bold font-display">Web Design</h3>
-                </div>
-            </div>
-
-            <div onclick="openCarousel(2)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" alt="3D Art" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <h3 class="text-white text-2xl font-bold font-display">Advertising Design</h3>
-                </div>
-            </div>
-
-            <div onclick="openCarousel(3)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" alt="Poster Design" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <h3 class="text-white text-2xl font-bold font-display">2D/3D Animation</h3>
-                </div>
-            </div>
-
-            <div onclick="openCarousel(4)" class="gallery-item cursor-pointer relative overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 aspect-square">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" alt="Logofolio" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <h3 class="text-white text-2xl font-bold font-display">Branding</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div id="carouselModal" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col transition-all duration-500 opacity-0 scale-95">
-    <div class="p-6 flex justify-between items-center text-white">
-        <h2 id="modalTitle" class="text-2xl font-bold font-display italic">Project Details</h2>
-        <button onclick="closeCarousel()" class="p-3 hover:bg-zinc-800 rounded-full transition text-accent">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-    </div>
-    
-    <div class="flex-1 relative flex items-center justify-center overflow-hidden">
-        <button onclick="moveSlide(-1)" class="absolute left-6 z-10 p-4 bg-white/5 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition">
-            <i data-lucide="chevron-left" class="w-8 h-8"></i>
-        </button>
-        <button onclick="moveSlide(1)" class="absolute right-6 z-10 p-4 bg-white/5 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition">
-            <i data-lucide="chevron-right" class="w-8 h-8"></i>
-        </button>
-
-        <div class="w-full h-full flex items-center justify-center p-4">
-            <img id="carouselImg" src="" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-all duration-300">
+    <div class="section-label">01. Marketing & Advertising</div>
+    <div class="carousel-container">
+        <div class="carousel-track animate-slow" id="track1">
+            <div class="card"><img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"></div>
         </div>
     </div>
 
-    <div id="slideCounter" class="p-8 text-center text-zinc-500 font-bold tracking-widest text-sm">
-        1 / 6
-    </div>
-</div>
-</section>
-
-    <footer id="contact" class="py-32 px-6 bg-zinc-100 dark:bg-zinc-900 mt-20">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-            <div>
-                <h2 class="text-5xl font-black font-display mb-6 tracking-tighter italic">Let's create something <span class="text-accent italic">beautiful.</span></h2>
-                <p class="text-xl text-zinc-500 dark:text-zinc-400 mb-8">Open for commissions, and creative direction.</p>
-            </div>
-            <div class="text-left md:text-right">
-                <a href="mailto:Emmersonkojo@gmail.com" class="text-4xl md:text-6xl font-display font-bold hover:text-accent transition break-all">
-                    Emmersonkojo@gmail.com
-                </a>
-            </div>
+    <div class="section-label">02. Branding & Product Design</div>
+    <div class="carousel-container">
+        <div class="carousel-track animate-reverse" id="track2">
+            <div class="card"><img src="https://images.unsplash.com/photo-1634942537034-2531766767d7?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1601308389333-6623668f448b?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"></div>
         </div>
-    </footer>
+    </div>
+
+    <div class="section-label">03. Digital Illustration & Logo Design</div>
+    <div class="carousel-container">
+        <div class="carousel-track animate-medium" id="track3">
+            <div class="card"><img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=800"></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&q=80&w=800"></div>
+        </div>
+    </div>
+
+    <section class="contact-section" id="contact">
+        <h2 class="reveal-text">Lets make Art</h2>
+        <p>Open for commissions and creative direction</p>
+        <a href="mailto:emmersonkojo@gmail.com" class="email-link">emmersonkojo@gmail.com</a>
+    </section>
+
+    <footer>&copy; Turning Ideas into Art since 2018</footer>
 
     <script>
-    // 1. PROJECT DATA (5 Projects x 6 Images)
-    const projectData = [
-        { name: "Digital Illustration", imgs: ["https://picsum.photos/seed/a1/1200/800", "https://picsum.photos/seed/a2/1200/800", "https://picsum.photos/seed/a3/1200/800", "https://picsum.photos/seed/a4/1200/800", "https://picsum.photos/seed/a5/1200/800", "https://picsum.photos/seed/a6/1200/800"] },
-        { name: "Web Design", imgs: ["https://picsum.photos/seed/b1/1200/800", "https://picsum.photos/seed/b2/1200/800", "https://picsum.photos/seed/b3/1200/800", "https://picsum.photos/seed/b4/1200/800", "https://picsum.photos/seed/b5/1200/800", "https://picsum.photos/seed/b6/1200/800"] },
-        { name: "Advertising Design", imgs: ["images/projects/marketingandadvertisingdesign/img-13.jpg", "images/projects/marketingandadvertisingdesign/img-6.JPG", "images/projects/marketingandadvertisingdesign/img-12.JPG", "images/projects/marketingandadvertisingdesign/img-10.jpg", "images/projects/marketingandadvertisingdesign/img-9.jpg", "images/projects/marketingandadvertisingdesign/img-11.jpg"] },
-        { name: "2D/3D Animation", imgs: ["https://picsum.photos/seed/d1/1200/800", "https://picsum.photos/seed/d2/1200/800", "https://picsum.photos/seed/d3/1200/800", "https://picsum.photos/seed/d4/1200/800", "https://picsum.photos/seed/d5/1200/800", "https://picsum.photos/seed/d6/1200/800"] },
-        { name: "Branding", imgs: ["https://picsum.photos/seed/e1/1200/800", "https://picsum.photos/seed/e2/1200/800", "https://picsum.photos/seed/e3/1200/800", "https://picsum.photos/seed/e4/1200/800", "https://picsum.photos/seed/e5/1200/800", "https://picsum.photos/seed/e6/1200/800"] }
-    ];
+        ['track1', 'track2', 'track3'].forEach(id => {
+            const track = document.getElementById(id);
+            track.innerHTML += track.innerHTML; 
+        });
 
-    let activeProject = 0;
-    let activeSlide = 0;
-    let touchStartX = 0;
+        const themeBtn = document.getElementById('themeBtn');
+        if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
 
-    const modal = document.getElementById('carouselModal');
-    const cImg = document.getElementById('carouselImg');
-    const cTitle = document.getElementById('modalTitle');
-    const cCount = document.getElementById('slideCounter');
-
-    // --- CAROUSEL FUNCTIONS ---
-    function openCarousel(index) {
-        activeProject = index;
-        activeSlide = 0;
-        updateCarousel();
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.classList.remove('opacity-0', 'scale-95');
-            modal.classList.add('opacity-100', 'scale-100', 'flex');
-        }, 10);
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeCarousel() {
-        modal.classList.add('opacity-0', 'scale-95');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }, 500);
-        document.body.style.overflow = 'auto';
-    }
-function moveSlide(step) {
-    // 1. Get the current project and its total images
-    const currentProject = projectData[activeProject];
-    if (!currentProject) return; // Safety check
-
-    const total = currentProject.imgs.length;
-    
-    // 2. Calculate the new slide index
-    activeSlide = (activeSlide + step + total) % total;
-    
-    console.log(`Switching to slide: ${activeSlide + 1} of ${total}`);
-
-    // 3. Trigger the UI update
-    updateCarousel();
-}
-
-function updateCarousel() {
-    const p = projectData[activeProject];
-    const total = p.imgs.length;
-    
-    // Update the Image source
-    cImg.src = p.imgs[activeSlide];
-    
-    // Update the Title and Counter
-    cTitle.innerText = p.name;
-    cCount.innerText = `${activeSlide + 1} / ${total}`;
-    
-    console.log("Current Image Path:", cImg.src);
-}
-
-    // --- TOUCH & GESTURE SUPPORT ---
-    modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
-    modal.addEventListener('touchend', e => {
-        let touchEndX = e.changedTouches[0].screenX;
-        if (touchEndX < touchStartX - 50) moveSlide(1);  // Swipe Left
-        if (touchEndX > touchStartX + 50) moveSlide(-1); // Swipe Right
-    }, false);
-
-    // --- KEYBOARD SUPPORT ---
-    document.addEventListener('keydown', (e) => {
-        if (!modal.classList.contains('hidden')) {
-            if (e.key === "Escape") closeCarousel();
-            if (e.key === "ArrowRight") moveSlide(1);
-            if (e.key === "ArrowLeft") moveSlide(-1);
-        }
-    });
-
-    // --- DARK MODE LOGIC ---
-    function initTheme() {
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        }
-
-        if(themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                html.classList.toggle('dark');
-                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                else entry.target.classList.remove('is-visible');
             });
-        }
-    }
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-    // --- INITIALIZE EVERYTHING ---
-    window.onload = () => {
-        initTheme();
-        lucide.createIcons();
-    };
-
-    // If using the shared navbar script from earlier, re-init icons after fetch
-    // fetch('nav.html').then(res => res.text()).then(data => { ... lucide.createIcons(); });
-</script>
+        observer.observe(document.querySelector('.reveal-text'));
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
