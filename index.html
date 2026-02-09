@@ -85,7 +85,7 @@
     /* LOGO DESIGN SPECIFIC: Half Size */
     #track3 .card { width: calc(var(--card-width) / 2); }
 
-    /* MARKETING STYLES */
+    /* MARKETING & MULTI-ROW STYLES */
     .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
     
     /* Extra tracks hidden by default (Desktop) */
@@ -109,6 +109,13 @@
         100% { transform: translateX(0); }
     }
 
+    /* Branding Section Desktop Adjustments */
+    @media (min-width: 769px) {
+        /* Remove gap and offset on desktop to make Branding tracks look like one row */
+        .branding-container { gap: 0; }
+        #track2-b.offset-1 { animation-delay: 0s; }
+    }
+
     /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 768px) {
         :root {
@@ -120,9 +127,12 @@
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
         
-        /* Show the 4 rows on mobile */
+        /* Show the extra rows on mobile */
         #track1-c, #track1-d { display: flex; }
         .marketing-carousel { gap: 15px; }
+
+        /* Ensure Branding behaves like Marketing on mobile */
+        #track2-b.offset-1 { animation-delay: -5s; }
     }
 
     /* --- CONTACT SECTION --- */
@@ -191,11 +201,13 @@
     </div>
 
     <div class="section-label">02. Branding & Product Design</div>
-    <div class="carousel-container">
-        <div class="carousel-track animate-reverse" id="track2">
+    <div class="carousel-container marketing-carousel branding-container">
+        <div class="carousel-track animate-reverse" id="track2-a">
             <div class="card"><img src="images/projects/branding/br-7.jpg" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-3.jpg" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-5.jpg" alt=""></div>
+        </div>
+        <div class="carousel-track animate-reverse offset-1" id="track2-b">
             <div class="card"><img src="images/projects/branding/br-4.png" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-6.png" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-10.png" alt=""></div>
@@ -222,8 +234,8 @@
     <footer>&copy; 2018-2026</footer>
 
     <script>
-        // Update track list to include C and D
-        ['track1-a', 'track1-b', 'track1-c', 'track1-d', 'track2', 'track3'].forEach(id => {
+        // Updated track IDs list for cloning
+        ['track1-a', 'track1-b', 'track1-c', 'track1-d', 'track2-a', 'track2-b', 'track3'].forEach(id => {
             const track = document.getElementById(id);
             if(track) track.innerHTML += track.innerHTML; 
         });
@@ -238,7 +250,9 @@
                 if (entry.isIntersecting) entry.target.classList.add('is-visible');
             });
         }, { threshold: 0.1 });
-        observer.observe(document.querySelector('.reveal-text'));
+        
+        const revealEl = document.querySelector('.reveal-text');
+        if(revealEl) observer.observe(revealEl);
     </script>
 </body>
 </html>
