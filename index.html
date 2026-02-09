@@ -82,6 +82,10 @@
     .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .card img { width: 100%; height: 100%; object-fit: cover; }
 
+    /* SPECIAL TWO-COLUMN MARKETING STYLES */
+    .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
+    .offset-row { animation-delay: -15s !important; } /* This staggers the second row images */
+
     .animate-slow { animation: scroll 35s linear infinite; }    
     .animate-reverse { animation: scroll-reverse 25s linear infinite; } 
     .animate-medium { animation: scroll 20s linear infinite; }   
@@ -98,7 +102,7 @@
     /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 768px) {
         :root {
-            --card-width: 40vw;
+            --card-width: 45vw;
             --card-gap: 15px;
         }
         header { padding: 15px 20px; }
@@ -159,8 +163,16 @@
     </section>
 
     <div class="section-label">01. Marketing & Advertising</div>
-    <div class="carousel-container">
-        <div class="carousel-track animate-slow" id="track1">
+    <div class="carousel-container marketing-carousel">
+        <div class="carousel-track animate-slow" id="track1-a">
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design 13"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design 6"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design 12"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Design 10"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Marketing Design 9"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Marketing Design 11"></div>
+        </div>
+        <div class="carousel-track animate-slow offset-row" id="track1-b">
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Design 13"></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Marketing Design 6"></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Marketing Design 12"></div>
@@ -191,8 +203,6 @@
             <div class="card"><img src="images/projects/logodesign/logo8.png" alt="Logo Design"></div>
             <div class="card"><img src="images/projects/logodesign/logo5.png" alt="Logo Design"></div>
             <div class="card"><img src="images/projects/logodesign/logo7.png" alt="Logo Design"></div>
-
-
         </div>
     </div>
 
@@ -205,11 +215,13 @@
     <footer>&copy; Turning Ideas into Art since 2018</footer>
 
     <script>
-        ['track1', 'track2', 'track3'].forEach(id => {
+        // Initializing tracks for infinite scroll (duplicated content)
+        ['track1-a', 'track1-b', 'track2', 'track3'].forEach(id => {
             const track = document.getElementById(id);
-            track.innerHTML += track.innerHTML; 
+            if(track) track.innerHTML += track.innerHTML; 
         });
 
+        // Theme Toggle Logic
         const themeBtn = document.getElementById('themeBtn');
         if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); }
         themeBtn.addEventListener('click', () => {
@@ -217,6 +229,7 @@
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         });
 
+        // Intersection Observer for Reveal Text
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('is-visible');
@@ -228,5 +241,3 @@
     </script>
 </body>
 </html>
-
-
