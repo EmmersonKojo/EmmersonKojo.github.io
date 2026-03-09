@@ -15,14 +15,16 @@
         --accent-color: #ff3e00; 
         --card-width: 400px; 
         --card-gap: 25px;
+        --bg-overlay: rgba(0, 0, 0, 0.2);
     }
 
     body.light-mode {
-        --bg-color: #f5f5f5;
+        --bg-color: #ffffff;
         --text-color: #0a0a0a;
         --header-bg: #ffffff;
         --card-bg: #eeeeee;
         --label-color: #444;
+        --bg-overlay: rgba(255, 255, 255, 0);
     }
 
     html { scroll-behavior: smooth; }
@@ -77,25 +79,26 @@
     .card {
         width: var(--card-width); aspect-ratio: 1 / 1;
         background: var(--card-bg); flex-shrink: 0; overflow: hidden;
-        position: relative; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); z-index: 1;
+        position: relative; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s; z-index: 1;
     }
     .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-    .card img { width: 100%; height: 100%; object-fit: cover; }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.4s ease; }
 
-    /* LOGO DESIGN SPECIFIC: Half Size */
-    #track3 .card { width: calc(var(--card-width) / 2); }
-
-    /* MARKETING & MULTI-ROW STYLES */
-    .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
+    /* Logo Design Specifics */
+    #track3 .card { width: calc(var(--card-width) / 2); background: transparent; }
     
-    /* Extra tracks hidden by default (Desktop) */
+    /* Invert Logos in Light Mode */
+    body.light-mode #track3 .card img {
+        filter: invert(1);
+    }
+
+    .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
     #track1-c, #track1-d { display: none; }
 
     .animate-slow { animation: scroll 35s linear infinite; }    
     .animate-reverse { animation: scroll-reverse 25s linear infinite; } 
     .animate-medium { animation: scroll 20s linear infinite; }   
 
-    /* Staggered offsets */
     .offset-1 { animation-delay: -5s; }
     .offset-2 { animation-delay: -15s; }
     .offset-3 { animation-delay: -25s; }
@@ -109,37 +112,49 @@
         100% { transform: translateX(0); }
     }
 
-    /* Branding Section Desktop Adjustments */
     @media (min-width: 769px) {
-        /* Remove gap and offset on desktop to make Branding tracks look like one row */
         .branding-container { gap: 0; }
         #track2-b.offset-1 { animation-delay: 0s; }
     }
 
-    /* --- MOBILE RESPONSIVENESS --- */
     @media (max-width: 768px) {
-        :root {
-            --card-width: 45vw;
-            --card-gap: 15px;
-        }
+        :root { --card-width: 45vw; --card-gap: 15px; }
         header { padding: 15px 20px; }
         .hero { padding: 120px 20px 20px; }
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
-        
-        /* Show the extra rows on mobile */
         #track1-c, #track1-d { display: flex; }
         .marketing-carousel { gap: 15px; }
-
-        /* Ensure Branding behaves like Marketing on mobile */
         #track2-b.offset-1 { animation-delay: -5s; }
     }
+
+    /* --- FULLSCREEN BACKGROUND --- */
+    .fullscreen-bg {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        overflow: hidden; z-index: -1;
+        background-color: var(--bg-color);
+        transition: background-color 0.4s ease;
+    }
+
+    .fullscreen-bg__content {
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center;
+        display: block; transition: opacity 0.4s ease;
+    }
+
+    .fullscreen-bg::after {
+        content: ""; position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--bg-overlay); transition: background 0.4s ease;
+    }
+
+    body.light-mode .fullscreen-bg__content { opacity: 0; }
 
     /* --- CONTACT SECTION --- */
     .contact-section { padding: 100px 20px; text-align: center; background-color: var(--card-bg); margin-top: 100px; transition: background-color 0.4s; }
     .reveal-text { font-weight: 900; font-size: clamp(3rem, 12vw, 10rem); margin: 0; line-height: 1; text-transform: uppercase; opacity: 0; transform: translateY(60px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal-text.is-visible { opacity: 1; transform: translateY(0); }
-    .contact-section p { font-size: 1.1rem; letter-spacing: 1px; margin: 20px 0 40px; font-weight: 400; opacity: 0.8; }
     .email-link { font-size: clamp(1rem, 5vw, 2.5rem); color: var(--text-color); text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--label-color); padding-bottom: 5px; transition: border-color 0.3s, opacity 0.3s; word-break: break-all; }
     .email-link:hover { opacity: 0.7; border-color: var(--accent-color); }
     footer { padding: 40px 20px; color: var(--label-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
@@ -157,6 +172,10 @@
             <a href="#contact">Contact</a>
         </nav>
     </header>
+
+    <div class="fullscreen-bg">
+        <img src="images/projects/Videos/IMG_4770.jpeg" alt="Background Loop" class="fullscreen-bg__content">
+    </div>
 
     <section class="hero">
         <h1>Turning<span> Complex Ideas</span> <br>Into Art</h1>
@@ -182,20 +201,6 @@
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-5.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-4.PNG" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-1.JPG" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-14.jpg" alt=""></div>
-        </div>
-        <div class="carousel-track animate-slow offset-2" id="track1-c">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-4.PNG" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt=""></div>
-        </div>
-        <div class="carousel-track animate-slow offset-3" id="track1-d">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-1.JPG" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt=""></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-5.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-14.jpg" alt=""></div>
         </div>
     </div>
@@ -224,41 +229,8 @@
             <div class="card"><img src="images/projects/logodesign/logo5.png" alt=""></div>
             <div class="card"><img src="images/projects/logodesign/logo7.png" alt=""></div>
         </div>
-    <style>
-    .fullscreen-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        z-index: -1; /* Places the loop behind your content */
-        background-color: #000; /* Fallback color while loading */
-    }
+    </div>
 
-    .fullscreen-bg__content {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures the GIF fills the screen without stretching */
-        object-position: center;
-        display: block;
-    }
-
-    /* Optional: Adds a slight dark overlay to make text on top more readable */
-    .fullscreen-bg::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.2); 
-    }
-</style>
-
-<div class="fullscreen-bg">
-    <img src="images/projects/Videos/IMG_4770.jpeg" alt="Background Loop" class="fullscreen-bg__content">
-</div>
     <section class="contact-section" id="contact">
         <h2 class="reveal-text">Lets make Art</h2>
         <a href="mailto:emmersonkojo@gmail.com" class="email-link">emmersonkojo@gmail.com</a>
@@ -267,8 +239,7 @@
     <footer>&copy; 2018-2026</footer>
 
     <script>
-        // Updated track IDs list for cloning
-        ['track1-a', 'track1-b', 'track1-c', 'track1-d', 'track2-a', 'track2-b', 'track3'].forEach(id => {
+        ['track1-a', 'track1-b', 'track2-a', 'track2-b', 'track3'].forEach(id => {
             const track = document.getElementById(id);
             if(track) track.innerHTML += track.innerHTML; 
         });
@@ -289,7 +260,3 @@
     </script>
 </body>
 </html>
-
-
-
-
