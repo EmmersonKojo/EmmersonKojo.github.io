@@ -14,7 +14,7 @@
         --card-bg: #111;
         --label-color: #888;
         --accent-color: #ff3e00; 
-        --card-width: 400px; 
+        --card-height: 400px; /* Base height for artwork rows */
         --card-gap: 25px;
         --bg-overlay: rgba(0, 0, 0, 0.2);
     }
@@ -74,44 +74,81 @@
 
     /* --- CAROUSELS --- */
     .section-label { padding: 0 50px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 4px; color: var(--label-color); margin-top: 80px; font-weight: 700; }
-    .carousel-container { width: 100%; overflow: hidden; padding: 60px 0; position: relative; }
-    .carousel-track { display: flex; width: max-content; gap: var(--card-gap); will-change: transform; }
     
-    .card {
-        width: var(--card-width); aspect-ratio: 1 / 1;
-        background: var(--card-bg); flex-shrink: 0; overflow: hidden;
-        display: flex; align-items: center; justify-content: center;
-        position: relative; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s; z-index: 1;
+    .carousel-container { 
+        width: 100%; 
+        overflow: hidden; 
+        padding: 40px 0; 
+        position: relative; 
+        cursor: grab;
+        touch-action: pan-y; /* Guarantees mobile page scrolling remains completely unobstructed */
     }
-    .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-    .card img { width: 100%; height: 100%; object-fit: contain; transition: filter 0.4s ease; }
+    .carousel-container.is-dragging { cursor: grabbing; }
 
-    #track3 .card { width: calc(var(--card-width) / 2); background: transparent; }
+    .carousel-track { 
+        display: flex; 
+        width: max-content; 
+        gap: var(--card-gap); 
+        will-change: transform; 
+        user-select: none;
+    }
+    
+    /* Dynamically sized cards that tightly hug their image's natural aspect ratio */
+    .card {
+        height: var(--card-height);
+        width: auto;
+        background: transparent;
+        flex-shrink: 0;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: 4px;
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+        z-index: 1;
+    }
+    .card:hover { 
+        transform: scale(1.06); 
+        z-index: 10; 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+    }
+    .carousel-container.is-dragging .card:hover {
+        transform: none;
+    }
+
+    .card img { 
+        height: 100%; 
+        width: auto; 
+        max-width: none;
+        display: block; 
+        border-radius: 4px;
+        transition: filter 0.4s ease; 
+        pointer-events: none; /* Prevents ghost dragging on desktop */
+        -webkit-user-drag: none;
+    }
+
+    /* Section 03 - Logo design specific sizing */
+    #track3 .card { 
+        height: calc(var(--card-height) * 0.38); 
+        padding: 10px 20px;
+        box-sizing: border-box;
+    }
     body.light-mode #track3 .card img { filter: invert(1); }
 
     .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
 
-    .animate-slow { animation: scroll 31.82s linear infinite; }    
-    .animate-reverse { animation: scroll-reverse 22.73s linear infinite; } 
-    .animate-medium { animation: scroll 18.18s linear infinite; }   
-
-    .offset-1 { animation-delay: -5s; }
-
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-50% - (var(--card-gap) / 2))); }
-    }
-    @keyframes scroll-reverse {
-        0% { transform: translateX(calc(-50% - (var(--card-gap) / 2))); }
-        100% { transform: translateX(0); }
-    }
-
     @media (max-width: 768px) {
-        :root { --card-width: 45vw; --card-gap: 15px; }
+        :root { 
+            --card-height: 260px; 
+            --card-gap: 15px; 
+        }
+        #track3 .card { height: 90px; padding: 5px 12px; }
         header { padding: 15px 20px; }
         .hero { padding: 120px 20px 20px; }
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
+        .carousel-container { cursor: default; }
     }
 
     /* --- FULLSCREEN BACKGROUND --- */
@@ -185,9 +222,10 @@
         </p>
     </section>
 
+    <!-- 01. Marketing & Advertising -->
     <div class="section-label">01. Marketing & Advertising</div>
     <div class="carousel-container marketing-carousel">
-        <div class="carousel-track animate-slow" id="track1-a">
+        <div class="carousel-track" id="track1-a">
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt=""></div>
@@ -197,7 +235,7 @@
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-16.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-18.jpg" alt=""></div>
         </div>
-        <div class="carousel-track animate-slow offset-1" id="track1-b">
+        <div class="carousel-track" id="track1-b">
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-5.jpg" alt=""></div>
             <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-4.PNG" alt=""></div>
@@ -209,23 +247,25 @@
         </div>
     </div>
 
+    <!-- 02. Branding & Product Design -->
     <div class="section-label">02. Branding & Product Design</div>
     <div class="carousel-container marketing-carousel branding-container">
-        <div class="carousel-track animate-reverse" id="track2-a">
+        <div class="carousel-track" id="track2-a">
             <div class="card"><img src="images/projects/branding/br-7.jpg" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-3.jpg" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-5.jpg" alt=""></div>
         </div>
-        <div class="carousel-track animate-reverse offset-1" id="track2-b">
+        <div class="carousel-track" id="track2-b">
             <div class="card"><img src="images/projects/branding/br-4.png" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-6.png" alt=""></div>
             <div class="card"><img src="images/projects/branding/br-10.png" alt=""></div>
         </div>
     </div>
 
+    <!-- 03. Logo Design -->
     <div class="section-label">03. Logo Design</div>
     <div class="carousel-container">
-        <div class="carousel-track animate-medium" id="track3">
+        <div class="carousel-track" id="track3">
             <div class="card"><img src="images/projects/logodesign/logo1.png" alt=""></div>
             <div class="card"><img src="images/projects/logodesign/logo2.png" alt=""></div>
             <div class="card"><img src="images/projects/logodesign/logo3.png" alt=""></div>
@@ -252,16 +292,150 @@
     <footer>&copy; 2018-2026</footer>
 
     <script>
-        ['track1-a', 'track1-b', 'track2-a', 'track2-b', 'track3'].forEach(id => {
-            const track = document.getElementById(id);
-            if(track) track.innerHTML += track.innerHTML; 
+        // Track setup with +10% speed durations (seconds per full loop)
+        const trackConfigs = {
+            'track1-a': { duration: 31.82, dir: -1, offsetPct: 0 },
+            'track1-b': { duration: 31.82, dir: -1, offsetPct: 0.35 },
+            'track2-a': { duration: 22.73, dir: 1,  offsetPct: 0 },
+            'track2-b': { duration: 22.73, dir: 1,  offsetPct: 0.35 },
+            'track3':   { duration: 18.18, dir: -1, offsetPct: 0 }
+        };
+
+        const tracks = [];
+
+        // Clone each track once for seamless infinite wrapping
+        Object.keys(trackConfigs).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.innerHTML += el.innerHTML;
+                tracks.push({
+                    id,
+                    el,
+                    config: trackConfigs[id],
+                    pos: 0,
+                    velocity: 0,
+                    halfWidth: 0,
+                    containerState: { isHovered: false }
+                });
+            }
         });
 
+        // Recalculate half-widths cleanly when images or viewport change
+        function updateTrackBounds() {
+            tracks.forEach(t => {
+                t.halfWidth = t.el.scrollWidth / 2;
+                if (t.pos === 0 && t.halfWidth > 0) {
+                    if (t.config.dir === -1) {
+                        t.pos = -t.halfWidth * t.config.offsetPct;
+                    } else {
+                        t.pos = -t.halfWidth + (t.halfWidth * t.config.offsetPct);
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('load', updateTrackBounds);
+        window.addEventListener('resize', updateTrackBounds);
+        updateTrackBounds();
+
+        // High-performance requestAnimationFrame continuous ticker
+        let lastTime = performance.now();
+
+        function animate(currentTime) {
+            const dt = Math.min((currentTime - lastTime) / 1000, 0.1);
+            lastTime = currentTime;
+
+            tracks.forEach(t => {
+                const hw = t.halfWidth;
+                if (hw > 0) {
+                    // Auto-scroll when not hovered
+                    if (!t.containerState.isHovered) {
+                        const baseSpeed = (hw / t.config.duration) * t.config.dir;
+                        t.pos += baseSpeed * dt;
+                    }
+
+                    // Apply momentum from desktop wheel or drag interaction
+                    if (Math.abs(t.velocity) > 0.05) {
+                        t.pos += t.velocity;
+                        t.velocity *= 0.92; // Fluid friction
+                    } else {
+                        t.velocity = 0;
+                    }
+
+                    // Seamless infinite loop wrap
+                    while (t.pos <= -hw) t.pos += hw;
+                    while (t.pos > 0) t.pos -= hw;
+
+                    t.el.style.transform = `translate3d(${t.pos}px, 0, 0)`;
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        // --- DESKTOP ONLY: Wheel Scrub & Mouse Drag ---
+        const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        if (isDesktop) {
+            document.querySelectorAll('.carousel-container').forEach(container => {
+                const associatedTracks = tracks.filter(t => container.contains(t.el));
+                let isDragging = false;
+                let lastX = 0;
+
+                container.addEventListener('mouseenter', () => {
+                    associatedTracks.forEach(t => t.containerState.isHovered = true);
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    associatedTracks.forEach(t => t.containerState.isHovered = false);
+                    isDragging = false;
+                    container.classList.remove('is-dragging');
+                });
+
+                // Wheel interaction: scroll wheel over carousel moves it in given direction
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+                    associatedTracks.forEach(t => {
+                        // Scrolling down moves carousel right-to-left, scrolling up moves left-to-right
+                        t.velocity -= delta * 0.45;
+                    });
+                }, { passive: false });
+
+                // Click-and-drag scrubbing
+                container.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    lastX = e.clientX;
+                    container.classList.add('is-dragging');
+                });
+
+                window.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const deltaX = e.clientX - lastX;
+                    lastX = e.clientX;
+                    associatedTracks.forEach(t => {
+                        t.pos += deltaX;
+                        t.velocity = deltaX * 0.4;
+                    });
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        container.classList.remove('is-dragging');
+                    }
+                });
+            });
+        }
+
+        // Theme Toggle
         const themeBtn = document.getElementById('themeBtn');
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
         });
 
+        // Contact Section Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('is-visible');
@@ -269,7 +443,7 @@
         }, { threshold: 0.1 });
         
         const revealEl = document.querySelector('.reveal-text');
-        if(revealEl) observer.observe(revealEl);
+        if (revealEl) observer.observe(revealEl);
     </script>
 </body>
 </html>
