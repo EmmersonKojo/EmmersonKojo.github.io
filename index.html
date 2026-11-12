@@ -393,14 +393,26 @@
                     container.classList.remove('is-dragging');
                 });
 
-                // Wheel interaction: scroll wheel over carousel moves it in given direction
+                // Wheel interaction: horizontal gestures move the carousel,
+                // vertical scrolling always passes through to the page
                 container.addEventListener('wheel', (e) => {
-                    e.preventDefault();
-                    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-                    associatedTracks.forEach(t => {
-                        // Scrolling down moves carousel right-to-left, scrolling up moves left-to-right
-                        t.velocity -= delta * 0.45;
-                    });
+                    const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+
+                    if (isHorizontal) {
+                        // Trackpad two-finger swipe or Shift + mouse wheel
+                        e.preventDefault();
+                        associatedTracks.forEach(t => {
+                            t.velocity -= e.deltaX * 0.45;
+                        });
+                    } else {
+                        // Vertical scroll: don't block the page.
+                        // Optional: gentle nudge on the carousel as the page scrolls.
+                        // Set NUDGE to 0 to turn this off.
+                        const NUDGE = 0.15;
+                        associatedTracks.forEach(t => {
+                            t.velocity -= e.deltaY * NUDGE;
+                        });
+                    }
                 }, { passive: false });
 
                 // Click-and-drag scrubbing
