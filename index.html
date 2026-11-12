@@ -138,6 +138,29 @@
 
     .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
 
+    /* --- MOTION GRAPHICS LINK SECTION --- */
+    .link-section { padding: 40px 50px 0; }
+
+    .tap-button {
+        display: inline-block;
+        background-color: #EC4F27;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-weight: 900;
+        font-size: clamp(1rem, 3vw, 1.4rem);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        padding: 18px 44px;
+        border-radius: 4px;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+    }
+    .tap-button:hover {
+        transform: translateY(-4px) scale(1.04);
+        box-shadow: 0 12px 28px rgba(236, 79, 39, 0.4);
+    }
+    .tap-button:active { transform: scale(0.98); }
+
     @media (max-width: 768px) {
         :root { 
             --card-height: 260px; 
@@ -149,6 +172,7 @@
         .about-section { padding: 20px 20px 40px; }
         .section-label { padding: 0 20px; margin-top: 40px; }
         .carousel-container { cursor: default; }
+        .link-section { padding: 20px 20px 0; }
     }
 
     /* --- FULLSCREEN BACKGROUND --- */
@@ -273,6 +297,13 @@
             <div class="card"><img src="images/projects/logodesign/logo5.png" alt=""></div>
             <div class="card"><img src="images/projects/logodesign/logo7.png" alt=""></div>
         </div>
+    </div>
+
+    <!-- 04. Motion Graphics & Animation -->
+    <div class="section-label">04. Motion Graphics & Animation</div>
+    <div class="link-section">
+        <a href="https://www.behance.net/gallery/247507357/Motion-Graphics-Video-Editing"
+           class="tap-button" target="_blank" rel="noopener noreferrer">Tap here</a>
     </div>
 
     <section class="contact-section" id="contact">
@@ -408,7 +439,7 @@
                         // Vertical scroll: don't block the page.
                         // Optional: gentle nudge on the carousel as the page scrolls.
                         // Set NUDGE to 0 to turn this off.
-                        const NUDGE = 0.02;
+                        const NUDGE = 0.15;
                         associatedTracks.forEach(t => {
                             t.velocity -= e.deltaY * NUDGE;
                         });
