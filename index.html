@@ -408,7 +408,7 @@
                         // Vertical scroll: don't block the page.
                         // Optional: gentle nudge on the carousel as the page scrolls.
                         // Set NUDGE to 0 to turn this off.
-                        const NUDGE = 0.15;
+                        const NUDGE = 0.02;
                         associatedTracks.forEach(t => {
                             t.velocity -= e.deltaY * NUDGE;
                         });
