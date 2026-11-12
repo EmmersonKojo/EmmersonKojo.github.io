@@ -4,27 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emerson | Communication Design Portfolio</title>
-    
-    <!-- SEO & Social Sharing (Open Graph) -->
-    <meta name="description" content="Portfolio of Emerson, a creative professional specializing in Branding, Digital Marketing, and Web Design.">
-    <meta property="og:title" content="Emerson | Communication Design Portfolio">
-    <meta property="og:description" content="Turning complex ideas into art. 8 years of experience in Branding, Digital Marketing, and Web Design.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="images/projects/marketingandadvertisingdesign/img-13.jpg">
-
-    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
-    
     <style>
     :root {
         --bg-color: #0a0a0a;
         --text-color: #ffffff;
         --header-bg: #000000;
-        --card-bg: #111111;
-        --label-color: #888888;
+        --card-bg: #111;
+        --label-color: #888;
         --accent-color: #ff3e00; 
         --card-width: 400px; 
         --card-gap: 25px;
@@ -36,7 +24,7 @@
         --text-color: #0a0a0a;
         --header-bg: #ffffff;
         --card-bg: #eeeeee;
-        --label-color: #444444;
+        --label-color: #444;
         --bg-overlay: rgba(255, 255, 255, 0);
     }
 
@@ -48,7 +36,7 @@
         font-family: 'Inter', sans-serif;
         color: var(--text-color);
         overflow-x: hidden;
-        transition: background-color 0.4s ease, color 0.4s ease;
+        transition: background-color 0.4s, color 0.4s;
     }
 
     /* --- NAVIGATION --- */
@@ -56,14 +44,13 @@
         display: flex; justify-content: space-between; align-items: center;
         padding: 20px 50px; position: fixed;
         top: 0; left: 0; width: 100%; box-sizing: border-box; z-index: 1000;
-        background-color: var(--header-bg); transition: background-color 0.4s ease;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+        background-color: var(--header-bg); transition: background-color 0.4s;
+        border-bottom: 1px solid rgba(128,128,128,0.1);
     }
 
     .logo { font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -0.5px; }
     header nav { display: flex; align-items: center; gap: 30px; }
-    header nav a { color: var(--text-color); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-    header nav a:hover { color: var(--accent-color); }
+    header nav a { color: var(--text-color); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
 
     .theme-toggle {
         background: none; border: none; color: var(--text-color); cursor: pointer;
@@ -87,31 +74,26 @@
 
     /* --- CAROUSELS --- */
     .section-label { padding: 0 50px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 4px; color: var(--label-color); margin-top: 80px; font-weight: 700; }
-    .carousel-container { width: 100%; overflow: hidden; padding: 50px 0; position: relative; }
+    .carousel-container { width: 100%; overflow: hidden; padding: 60px 0; position: relative; }
     .carousel-track { display: flex; width: max-content; gap: var(--card-gap); will-change: transform; }
     
-    /* Pause carousel animation when hovering over it */
-    .carousel-container:hover .carousel-track {
-        animation-play-state: paused;
-    }
-
     .card {
         width: var(--card-width); aspect-ratio: 1 / 1;
         background: var(--card-bg); flex-shrink: 0; overflow: hidden;
         position: relative; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s; z-index: 1;
-        border-radius: 4px;
     }
-    .card:hover { transform: scale(1.08); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 0.4s ease; }
+    .card:hover { transform: scale(1.12); cursor: pointer; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.4s ease; }
 
     #track3 .card { width: calc(var(--card-width) / 2); background: transparent; }
     body.light-mode #track3 .card img { filter: invert(1); }
 
     .marketing-carousel { display: flex; flex-direction: column; gap: var(--card-gap); }
 
-    .animate-slow { animation: scroll 35s linear infinite; }    
-    .animate-reverse { animation: scroll-reverse 25s linear infinite; } 
-    .animate-medium { animation: scroll 20s linear infinite; }   
+    /* Updated durations for +10% speed */
+    .animate-slow { animation: scroll 31.82s linear infinite; }    
+    .animate-reverse { animation: scroll-reverse 22.73s linear infinite; } 
+    .animate-medium { animation: scroll 18.18s linear infinite; }   
 
     .offset-1 { animation-delay: -5s; }
 
@@ -125,7 +107,7 @@
     }
 
     @media (max-width: 768px) {
-        :root { --card-width: 60vw; --card-gap: 15px; }
+        :root { --card-width: 45vw; --card-gap: 15px; }
         header { padding: 15px 20px; }
         .hero { padding: 120px 20px 20px; }
         .about-section { padding: 20px 20px 40px; }
@@ -173,7 +155,7 @@
         transform: translateX(5px);
     }
 
-    footer { padding: 40px 20px; color: var(--label-color); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+    footer { padding: 40px 20px; color: var(--label-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
 </style>
 </head>
 <body>
@@ -181,7 +163,7 @@
     <header>
         <div class="logo">Emerson</div>
         <nav>
-            <button class="theme-toggle" id="themeBtn" aria-label="Toggle light and dark mode">
+            <button class="theme-toggle" id="themeBtn">
                 <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41z"/></svg>
                 <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.12 22C6.54 22 2 17.46 2 11.88c0-4.77 3.35-8.86 8-9.87.56-.12 1.08.34 1.08.91 0 .26-.1.52-.29.7-1.14 1.1-1.79 2.59-1.79 4.2 0 3.59 2.91 6.5 6.5 6.5 1.61 0 3.1-.59 4.25-1.57.21-.18.5-.25.76-.17.56.16.89.74.74 1.3-.96 3.66-4.3 6.31-8.24 6.62-.16.01-.33.02-.49.02z"/></svg>
             </button>
@@ -190,7 +172,7 @@
     </header>
 
     <div class="fullscreen-bg">
-        <img src="images/projects/Videos/IMG_4770.jpeg" alt="Background Artwork" class="fullscreen-bg__content">
+        <img src="images/projects/Videos/IMG_4770.jpeg" alt="Background Loop" class="fullscreen-bg__content">
     </div>
 
     <section class="hero">
@@ -203,56 +185,58 @@
         </p>
     </section>
 
-    <!-- Section 01 -->
     <div class="section-label">01. Marketing & Advertising</div>
     <div class="carousel-container marketing-carousel">
         <div class="carousel-track animate-slow" id="track1-a">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt="Marketing Project" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt="Advertising Artwork" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt="Ad Campaign Design" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt="Marketing Poster" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt="Promotional Artwork" loading="lazy"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-13.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-6.JPG" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-12.JPG" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-10.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-9.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-7.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-16.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-18.jpg" alt=""></div>
         </div>
         <div class="carousel-track animate-slow offset-1" id="track1-b">
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt="Ad Creative" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-5.jpg" alt="Marketing Graphics" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-4.PNG" alt="Digital Ad Design" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-1.JPG" alt="Advertising Flyer" loading="lazy"></div>
-            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-14.jpg" alt="Creative Campaign" loading="lazy"></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-11.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-5.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-4.PNG" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-1.JPG" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-14.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-8.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-17.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/marketingandadvertisingdesign/img-19.jpg" alt=""></div>
         </div>
     </div>
 
-    <!-- Section 02 -->
     <div class="section-label">02. Branding & Product Design</div>
     <div class="carousel-container marketing-carousel branding-container">
         <div class="carousel-track animate-reverse" id="track2-a">
-            <div class="card"><img src="images/projects/branding/br-7.jpg" alt="Brand Identity" loading="lazy"></div>
-            <div class="card"><img src="images/projects/branding/br-3.jpg" alt="Product Branding" loading="lazy"></div>
-            <div class="card"><img src="images/projects/branding/br-5.jpg" alt="Packaging Concept" loading="lazy"></div>
+            <div class="card"><img src="images/projects/branding/br-7.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/branding/br-3.jpg" alt=""></div>
+            <div class="card"><img src="images/projects/branding/br-5.jpg" alt=""></div>
         </div>
         <div class="carousel-track animate-reverse offset-1" id="track2-b">
-            <div class="card"><img src="images/projects/branding/br-4.png" alt="Brand Guidelines" loading="lazy"></div>
-            <div class="card"><img src="images/projects/branding/br-6.png" alt="Visual Identity Design" loading="lazy"></div>
-            <div class="card"><img src="images/projects/branding/br-10.png" alt="Product Packaging" loading="lazy"></div>
+            <div class="card"><img src="images/projects/branding/br-4.png" alt=""></div>
+            <div class="card"><img src="images/projects/branding/br-6.png" alt=""></div>
+            <div class="card"><img src="images/projects/branding/br-10.png" alt=""></div>
         </div>
     </div>
 
-    <!-- Section 03 -->
     <div class="section-label">03. Logo Design</div>
     <div class="carousel-container">
         <div class="carousel-track animate-medium" id="track3">
-            <div class="card"><img src="images/projects/logodesign/logo1.png" alt="Logo Design 1" loading="lazy"></div>
-            <div class="card"><img src="images/projects/logodesign/logo2.png" alt="Logo Design 2" loading="lazy"></div>
-            <div class="card"><img src="images/projects/logodesign/logo3.png" alt="Logo Design 3" loading="lazy"></div>
-            <div class="card"><img src="images/projects/logodesign/logo8.png" alt="Logo Design 8" loading="lazy"></div>
-            <div class="card"><img src="images/projects/logodesign/logo5.png" alt="Logo Design 5" loading="lazy"></div>
-            <div class="card"><img src="images/projects/logodesign/logo7.png" alt="Logo Design 7" loading="lazy"></div>
+            <div class="card"><img src="images/projects/logodesign/logo1.png" alt=""></div>
+            <div class="card"><img src="images/projects/logodesign/logo2.png" alt=""></div>
+            <div class="card"><img src="images/projects/logodesign/logo3.png" alt=""></div>
+            <div class="card"><img src="images/projects/logodesign/logo8.png" alt=""></div>
+            <div class="card"><img src="images/projects/logodesign/logo5.png" alt=""></div>
+            <div class="card"><img src="images/projects/logodesign/logo7.png" alt=""></div>
         </div>
     </div>
 
-    <!-- Contact Section -->
     <section class="contact-section" id="contact">
-        <h2 class="reveal-text">Let's make Art</h2>
+        <h2 class="reveal-text">Lets make Art</h2>
         
         <div class="contact-info">
             <a href="mailto:emmersonkojo@gmail.com" class="contact-link">
@@ -265,30 +249,19 @@
         </div>
     </section>
 
-    <footer>&copy; 2018&ndash;<span id="year">2026</span> Emerson. All rights reserved.</footer>
+    <footer>&copy; 2018-2026</footer>
 
     <script>
-        // Duplicate tracks for continuous infinite scroll
         ['track1-a', 'track1-b', 'track2-a', 'track2-b', 'track3'].forEach(id => {
             const track = document.getElementById(id);
-            if (track) track.innerHTML += track.innerHTML; 
+            if(track) track.innerHTML += track.innerHTML; 
         });
 
-        // Theme Toggle with LocalStorage persistence
         const themeBtn = document.getElementById('themeBtn');
-        const savedTheme = localStorage.getItem('theme');
-
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-        }
-
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
-            const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
-            localStorage.setItem('theme', currentTheme);
         });
 
-        // Intersection Observer for Contact reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('is-visible');
@@ -296,10 +269,7 @@
         }, { threshold: 0.1 });
         
         const revealEl = document.querySelector('.reveal-text');
-        if (revealEl) observer.observe(revealEl);
-
-        // Keep copyright year current automatically
-        document.getElementById('year').textContent = new Date().getFullYear();
+        if(revealEl) observer.observe(revealEl);
     </script>
 </body>
 </html>
